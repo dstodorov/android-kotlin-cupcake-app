@@ -11,6 +11,7 @@ import java.util.*
 
 private const val PRICE_PER_CUPCAKE = 2.00
 private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
+private const val SPECIAL_PRODUCT = "Soft white chocolate"
 
 class OrderViewModel : ViewModel() {
 
@@ -25,6 +26,9 @@ class OrderViewModel : ViewModel() {
 
     private val _date = MutableLiveData<String>()
     val date: LiveData<String> = _date
+
+    private var _client = MutableLiveData<Client>()
+    val client: LiveData<Client> = _client
 
     private val _price = MutableLiveData<Double>()
     val price: LiveData<String> = Transformations.map(_price) {
@@ -52,6 +56,10 @@ class OrderViewModel : ViewModel() {
     fun setDate(pickupDate: String) {
         _date.value = pickupDate
         updatePrice()
+    }
+
+    fun setClient(client: Client) {
+        _client.value = client
     }
 
     private fun updatePrice() {
@@ -86,8 +94,12 @@ class OrderViewModel : ViewModel() {
         _quantityLabel.value = "1"
         _flavor.value = ""
         _date.value = dateOptions[0]
+        _client.value = null
         updatePrice()
     }
 
+    fun isInvalidOrder(): Boolean {
+        return _flavor.value.equals(SPECIAL_PRODUCT) && _date.value.equals(dateOptions[0])
+    }
 
 }

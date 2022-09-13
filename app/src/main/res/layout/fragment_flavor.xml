@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/side_margin">
@@ -91,9 +91,9 @@
                     android:id="@+id/soft_white_chocolate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="@{viewModel.flavor.equals(@string/coffee)}"
-                    android:onClick="@{() -> viewModel.setFlavor(@string/coffee)}"
-                    android:text="@string/soft_white_chocolate" />
+                    android:checked="@{viewModel.flavor.equals(@string/soft_white_chocolate)}"
+                    android:onClick="@{() -> viewModel.setFlavor(@string/soft_white_chocolate)}"
+                    android:text="@string/special" />
             </RadioGroup>
 
             <View

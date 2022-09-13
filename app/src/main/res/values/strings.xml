@@ -17,6 +17,8 @@
     <string name="app_name">Cupcake</string>
     <string name="order_cupcakes">Order Cupcakes</string>
     <string name="choose_flavor">Choose Flavor</string>
+    <string name="contact_information">Contact information</string>
+    <string name="special">Soft white chocolate (Special)</string>
     <string name="vanilla">Vanilla</string>
     <string name="chocolate">Chocolate</string>
     <string name="red_velvet">Red Velvet</string>
@@ -35,11 +37,21 @@
     <string name="subtotal_price">Subtotal %s</string>
     <string name="total_price">Total %s</string>
     <string name="new_cupcake_order">New Cupcake Order</string>
+    <string name="empty_field">Empty field</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+
+    <string name="info">Dear %1$s %2$s, \n Thank you for your order! \n In short we will contact you to confirm your order on %3$s \n\n</string>
+
     <string name="order_details">Quantity: %1$s \n Flavor: %2$s \nPickup date: %3$s \n
-        Total: %4$s \n\n Thank you!</string>
+        Total: %4$s \n\n</string>
 
     <plurals name="cupcakes">
         <item quantity="one">%d cupcake</item>
         <item quantity="other">%d cupcakes</item>
     </plurals>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

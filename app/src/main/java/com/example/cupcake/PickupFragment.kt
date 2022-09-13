@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -59,7 +60,15 @@ class PickupFragment : Fragment() {
      * Navigate to the next screen to see the order summary.
      */
     fun goToNextScreen() {
-        findNavController().navigate(R.id.action_pickupFragment_to_summaryFragment)
+        if (!sharedViewModel.isInvalidOrder()) {
+            findNavController().navigate(R.id.action_pickupFragment_to_contactsFragment)
+        } else {
+            Toast.makeText(
+                requireContext(),
+                "Cant purchase special product for the same day delivery!",
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
     /**

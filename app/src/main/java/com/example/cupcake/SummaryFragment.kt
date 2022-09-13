@@ -16,6 +16,7 @@
 package com.example.cupcake
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -64,6 +65,12 @@ class SummaryFragment : Fragment() {
 
         val numberOfCupcakes = sharedViewModel.quantity.value ?: 0
 
+        val info = getString(
+            R.string.info,
+            sharedViewModel.client.value?.firstName,
+            sharedViewModel.client.value?.lastName,
+            sharedViewModel.client.value?.phone
+        )
         val orderSummary = getString(
             R.string.order_details,
             resources.getQuantityString(R.plurals.cupcakes, numberOfCupcakes, numberOfCupcakes),
@@ -74,8 +81,9 @@ class SummaryFragment : Fragment() {
 
         val intent = Intent(Intent.ACTION_SEND)
             .setType("text/plain")
+            .putExtra(Intent.EXTRA_EMAIL, arrayOf(sharedViewModel.client.value?.email.toString()))
             .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.new_cupcake_order))
-            .putExtra(Intent.EXTRA_TEXT, orderSummary)
+            .putExtra(Intent.EXTRA_TEXT, info + orderSummary)
 
         if (activity?.packageManager?.resolveActivity(intent, 0) != null) {
             startActivity(intent)
