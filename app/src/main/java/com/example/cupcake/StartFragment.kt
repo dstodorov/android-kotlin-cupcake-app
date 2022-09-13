@@ -19,8 +19,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.cupcake.databinding.FragmentStartBinding
 import com.example.cupcake.model.OrderViewModel
@@ -51,18 +53,35 @@ class StartFragment : Fragment() {
 
         binding?.apply {
             // Set up the button click listeners
-            orderOneCupcake.setOnClickListener { orderCupcake(1) }
-            orderSixCupcakes.setOnClickListener { orderCupcake(6) }
-            orderTwelveCupcakes.setOnClickListener { orderCupcake(12) }
+            nextButton.setOnClickListener { orderCupcake() }
+
+
         }
+        val seekBarValueTextObserver = Observer<String> { newValue ->
+            binding?.numberOfCakesLabel?.text = newValue
+        }
+
+        sharedViewModel.quantityLabel.observe(viewLifecycleOwner, seekBarValueTextObserver)
+        binding?.numberOfCakesSeekbar?.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                sharedViewModel.setQuantity(p1)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+            }
+        })
+
+
     }
 
     /**
      * Start an order with the desired quantity of cupcakes and navigate to the next screen.
      */
-    fun orderCupcake(quantity: Int) {
-        sharedViewModel.setQuantity(quantity)
-
+    fun orderCupcake() {
         if (sharedViewModel.hasNoFlavorSet()) {
             sharedViewModel.setFlavor(getString(R.string.vanilla))
         }

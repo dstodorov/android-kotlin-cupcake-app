@@ -17,6 +17,9 @@ class OrderViewModel : ViewModel() {
     private val _quantity = MutableLiveData<Int>()
     val quantity: LiveData<Int> = _quantity
 
+    private val _quantityLabel = MutableLiveData<String>()
+    val quantityLabel: LiveData<String> = _quantityLabel
+
     private val _flavor = MutableLiveData<String>()
     val flavor: LiveData<String> = _flavor
 
@@ -32,10 +35,13 @@ class OrderViewModel : ViewModel() {
 
     init {
         resetOrder()
+        setQuantity(1)
     }
 
     fun setQuantity(numberCupcakes: Int) {
         _quantity.value = numberCupcakes
+        _quantityLabel.value = numberCupcakes.toString()
+        println("QUANTITY ${_quantity.value}")
         updatePrice()
     }
 
@@ -76,10 +82,11 @@ class OrderViewModel : ViewModel() {
     }
 
     fun resetOrder() {
-        _quantity.value = 0
+        _quantity.value = 1
+        _quantityLabel.value = "1"
         _flavor.value = ""
         _date.value = dateOptions[0]
-        _price.value = 0.0
+        updatePrice()
     }
 
 

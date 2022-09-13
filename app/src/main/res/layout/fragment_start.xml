@@ -22,6 +22,10 @@
     <data>
 
         <variable
+            name="sharedViewModel"
+            type="com.example.cupcake.model.OrderViewModel" />
+
+        <variable
             name="startFragment"
             type="com.example.cupcake.StartFragment" />
     </data>
@@ -54,35 +58,53 @@
                 android:textAppearance="?attr/textAppearanceHeadline4"
                 android:textColor="@color/material_on_background_emphasis_medium" />
 
-            <Button
-                android:id="@+id/order_one_cupcake"
-                android:onClick="@{() -> startFragment.orderCupcake(1)}"
+
+            <TextView
+                android:id="@+id/numberOfCakesLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_between_elements"
-                android:minWidth="@dimen/order_cupcake_button_width"
-                android:text="@string/one_cupcake" />
+                android:layout_marginBottom="@dimen/side_margin"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                android:textColor="@color/material_on_background_emphasis_medium"
+                android:textSize="50dp"
+                tools:text="0" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <SeekBar
+                    android:id="@+id/numberOfCakesSeekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:max="100"
+                    android:min="1"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:progressDrawable="@drawable/seekbar_style"
+                    android:thumb="@drawable/custom_thumb"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
-                android:id="@+id/order_six_cupcakes"
-                android:onClick="@{() -> startFragment.orderCupcake(6)}"
+                android:id="@+id/next_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_between_elements"
                 android:minWidth="@dimen/order_cupcake_button_width"
-                android:text="@string/six_cupcakes" />
+                android:onClick="@{() -> startFragment.orderCupcake()}"
+                android:text="@string/next" />
 
-            <Button
-                android:id="@+id/order_twelve_cupcakes"
-                android:onClick="@{() -> startFragment.orderCupcake(12)}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_between_elements"
-                android:minWidth="@dimen/order_cupcake_button_width"
-                android:text="@string/twelve_cupcakes" />
+
         </LinearLayout>
     </ScrollView>
 </layout>
